@@ -1,0 +1,141 @@
+import React, { useRef, useCallback } from 'react';
+import {
+  Image,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Alert
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
+import * as Yup from 'yup';
+
+import logo from '../../assets/logo.png';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import {
+  Container,
+  Title,
+  BackToSignIn,
+  BackToSignInText,
+  FormContainer
+} from './styles';
+import getValidationErrors from '../../utils/getValidationErrors';
+import { useAuth } from '../../hooks/auth';
+
+const SignUp = () => {
+  const formRef = useRef(null);
+  const emailInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+  const navigation = useNavigation();
+  const { signUp } = useAuth();
+
+  const handleSignUp = useCallback(async data => {
+    try {
+      formRef.current?.setErrors({});
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome obrigatório!'),
+        email: Yup.string()
+          .required('Email obrigatório!')
+          .email('Digite um email válido!'),
+        password: Yup.string()
+          .required('Senha obrigatória!')
+          .min(6, 'Mínimo 6 dígitos!')
+      });
+      await schema.validate(data, {
+        abortEarly: false
+      });
+
+      await signUp({
+        name: data.name,
+        email: data.email,
+        password: data.password
+      });
+
+      // navigation.navigate('signin');
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        formRef.current?.setErrors(getValidationErrors(err));
+        return;
+      }
+      Alert.alert(
+        'Erro no cadastro!',
+        'Não foi possível cadastrar, por favor, tente novamente mais tarde.'
+      );
+    }
+  }, []);
+
+  return (
+    <>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        enabled>
+        <ScrollView
+          contentContainerStyle={{ flex: 1 }}
+          keyboardShouldPersistTaps="handled">
+          <Container>
+            <Image source={logo} />
+
+            <View>
+              <Title>Crie sua conta</Title>
+            </View>
+
+            <FormContainer ref={formRef} onSubmit={handleSignUp}>
+              <Input
+                autoCapitalize="words"
+                name="name"
+                icon="user"
+                placeholder="Nome"
+                returnKeyType="next"
+                keyboardAppearance="dark"
+                onSubmitEditing={() => {
+                  emailInputRef.current.focus();
+                }}
+              />
+              <Input
+                ref={emailInputRef}
+                keyboardType="email-address"
+                autoCorrect={false}
+                autoCapitalize="none"
+                name="email"
+                icon="mail"
+                placeholder="E-mail"
+                returnKeyType="next"
+                keyboardAppearance="dark"
+                onSubmitEditing={() => {
+                  passwordInputRef.current.focus();
+                }}
+              />
+              <Input
+                ref={passwordInputRef}
+                secureTextEntry
+                name="password"
+                icon="lock"
+                placeholder="Senha"
+                textContentType="oneTimeCode"
+                returnKeyType="send"
+                keyboardAppearance="dark"
+                onSubmitEditing={() => formRef.current.submitForm()}
+              />
+              <Button onPress={() => formRef.current.submitForm()}>
+                Criar
+              </Button>
+            </FormContainer>
+          </Container>
+        </ScrollView>
+      </KeyboardAvoidingView>
+
+      <BackToSignIn
+        onPress={() => {
+          navigation.goBack();
+        }}>
+        <Icon name="arrow-left" size={20} color="#807A75" />
+        <BackToSignInText>Voltar para login</BackToSignInText>
+      </BackToSignIn>
+    </>
+  );
+};
+
+export default SignUp;
