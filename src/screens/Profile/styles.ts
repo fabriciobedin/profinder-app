@@ -10,7 +10,7 @@ export const Container = styled.View`
 export const Title = styled.Text`
   font-size: 24px;
   color: #f4ede8;
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'NotoSansJP-Medium';
   margin: 24px 0;
 `;
 
