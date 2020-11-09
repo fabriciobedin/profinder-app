@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
+import { Form } from '@unform/mobile';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 export const Container = styled.View`
@@ -46,4 +47,8 @@ export const CreateAccountButtonText = styled.Text`
   font-size: 18px;
   font-family: 'NotoSansJP-Regular';
   margin-left: 16px;
+`;
+
+export const FormContainer = styled(Form)`
+  width: 100%;
 `;

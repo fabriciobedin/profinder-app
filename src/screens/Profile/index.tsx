@@ -5,7 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TextInput,
-  Alert,
+  Alert
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
@@ -49,28 +49,28 @@ const Profile: React.FC = () => {
           .email('Digite um e-mail válido'),
         old_password: Yup.string(),
         password: Yup.string().when('old_password', {
-          is: (val) => !!val.length,
+          is: val => !!val.length,
           then: Yup.string().required('Campo obrigatório'),
-          otherwise: Yup.string(),
+          otherwise: Yup.string()
         }),
         password_confirmation: Yup.string()
           .when('old_password', {
-            is: (val) => !!val.length,
+            is: val => !!val.length,
             then: Yup.string().required('Campo obrigatório'),
-            otherwise: Yup.string(),
+            otherwise: Yup.string()
           })
-          .oneOf([Yup.ref('password'), null], 'Confirmação incorreta'),
+          .oneOf([Yup.ref('password'), 'undefined'], 'Confirmação incorreta')
       });
 
       await schema.validate(data, {
-        abortEarly: false,
+        abortEarly: false
       });
 
       console.log(data);
 
       Alert.alert(
         'Perfil atualizado com sucesso!',
-        'As informações do perfil foram atualizadas.',
+        'As informações do perfil foram atualizadas.'
       );
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
@@ -83,7 +83,7 @@ const Profile: React.FC = () => {
 
       Alert.alert(
         'Erro no cadastro',
-        'Ocorreu um erro ao fazer cadastro, tente novamente.',
+        'Ocorreu um erro ao fazer cadastro, tente novamente.'
       );
     }
   }, []);
@@ -93,14 +93,18 @@ const Profile: React.FC = () => {
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        enabled
-      >
+        enabled>
         <ScrollView
           keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{ flex: 1 }}
-        >
+          contentContainerStyle={{ flex: 1 }}>
           <Container>
-            <Avatar source={{ uri: user.avatar_url }} />
+            <Avatar
+              source={{
+                uri:
+                  user.avatar_url ||
+                  'https://avatars1.githubusercontent.com/u/18118086?s=460&u=c92e79f9ed6b4e502cfa8e1e3ff8de70aa8e14fb&v=4'
+              }}
+            />
 
             <View>
               <Title>Atualizar perfil</Title>

@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
-import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
@@ -23,7 +22,13 @@ import Button from '../../components/Button';
 
 import logoImg from '../../assets/logo.png';
 
-import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
+import {
+  Container,
+  Title,
+  BackToSignIn,
+  BackToSignInText,
+  FormContainer
+} from './styles';
 
 interface SignUpFormData {
   name: string;
@@ -94,10 +99,10 @@ const SignUp: React.FC = () => {
             <Image source={logoImg} />
 
             <View>
-              <Title>Crie sua conta</Title>
+              <Title>Criar conta</Title>
             </View>
 
-            <Form ref={formRef} onSubmit={handleSignUp}>
+            <FormContainer ref={formRef} onSubmit={handleSignUp}>
               <Input
                 autoCapitalize="words"
                 name="name"
@@ -135,16 +140,16 @@ const SignUp: React.FC = () => {
               />
 
               <Button onPress={() => formRef.current?.submitForm()}>
-                Entrar
+                Criar
               </Button>
-            </Form>
+            </FormContainer>
           </Container>
         </ScrollView>
       </KeyboardAvoidingView>
 
       <BackToSignIn onPress={() => navigation.goBack()}>
         <Icon name="arrow-left" size={20} color="#fff" />
-        <BackToSignInText>Voltar para logon</BackToSignInText>
+        <BackToSignInText>Voltar para login</BackToSignInText>
       </BackToSignIn>
     </>
   );

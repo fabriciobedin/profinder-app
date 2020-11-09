@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 
-import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 
 import { useAuth } from '../../hooks/auth';
@@ -30,7 +29,8 @@ import {
   ForgotPassword,
   ForgotPasswordText,
   CreateAccountButton,
-  CreateAccountButtonText
+  CreateAccountButtonText,
+  FormContainer
 } from './styles';
 
 interface SignInFormData {
@@ -99,10 +99,10 @@ const SignIn: React.FC = () => {
             <Image source={logoImg} />
 
             <View>
-              <Title>Faça seu logon</Title>
+              <Title>Login</Title>
             </View>
 
-            <Form ref={formRef} onSubmit={handleSignIn}>
+            <FormContainer ref={formRef} onSubmit={handleSignIn}>
               <Input
                 autoCorrect={false}
                 autoCapitalize="none"
@@ -134,7 +134,7 @@ const SignIn: React.FC = () => {
                 }}>
                 Entrar
               </Button>
-            </Form>
+            </FormContainer>
 
             <ForgotPassword onPress={() => {}}>
               <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>

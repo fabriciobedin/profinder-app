@@ -18,7 +18,7 @@ import {
   ProviderInfo,
   ProviderName,
   ProviderMeta,
-  ProviderMetaText,
+  ProviderMetaText
 } from './styles';
 
 export interface Provider {
@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
 
   useEffect(() => {
-    api.get('providers').then((response) => {
+    api.get('providers').then(response => {
       setProviders(response.data);
     });
   }, []);
@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
     (providerId: string) => {
       navigation.navigate('AppointmentDatePicker', { providerId });
     },
-    [navigation],
+    [navigation]
   );
 
   return (
@@ -54,13 +54,19 @@ const Dashboard: React.FC = () => {
         </HeaderTitle>
 
         <ProfileButton onPress={() => navigation.navigate('Profile')}>
-          <UserAvatar source={{ uri: user.avatar_url }} />
+          <UserAvatar
+            source={{
+              uri:
+                user.avatar_url ||
+                'https://avatars1.githubusercontent.com/u/18118086?s=460&u=c92e79f9ed6b4e502cfa8e1e3ff8de70aa8e14fb&v=4'
+            }}
+          />
         </ProfileButton>
       </Header>
 
       <ProvidersList
         data={providers}
-        keyExtractor={(provider) => provider.id}
+        keyExtractor={provider => provider.id}
         ListHeaderComponent={
           <ProvidersListTitle>Cabelereiros</ProvidersListTitle>
         }
