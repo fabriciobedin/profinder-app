@@ -57,6 +57,7 @@
 	<array>
 		<string>NotoSansJP-Medium.otf</string>
 		<string>NotoSansJP-Regular.otf</string>
+    <string>Feather.ttf</string>
 	</array>
 </dict>
 </plist>
