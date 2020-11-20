@@ -112,7 +112,7 @@ export const Section = styled.View`
 export const SectionTitle = styled.Text`
   font-size: 18px;
   color: #999591;
-  font-family: 'RobotoSlab-Regular';
+  font-family: 'NotoSansJP-Regular';
   margin: 0 24px 12px;
 `;
 
@@ -136,7 +136,7 @@ export const Hour = styled(RectButton).attrs((props: HourProps) => ({
 
 export const HourText = styled.Text<HourTextProps>`
   color: ${props => (props.selected ? '#232129' : '#f4ede8')};
-  font-family: 'RobotoSlab-Regular';
+  font-family: 'NotoSansJP-Regular';
   font-size: 18px;
 `;
 

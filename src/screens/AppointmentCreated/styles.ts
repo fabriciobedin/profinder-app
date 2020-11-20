@@ -17,7 +17,7 @@ export const Title = styled.Text`
 `;
 
 export const Description = styled.Text`
-  font-family: 'RobotoSlab-Regular';
+  font-family: 'NotoSansJP-Regular';
   font-size: 18px;
   color: #999591;
   margin-top: 16px;
