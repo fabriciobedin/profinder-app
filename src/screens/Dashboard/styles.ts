@@ -12,7 +12,6 @@ export const Header = styled.View`
   padding: 24px;
   padding-top: ${getStatusBarHeight() + 24}px;
   background: #28262e;
-
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -27,7 +26,7 @@ export const HeaderTitle = styled.Text`
 
 export const UserName = styled.Text`
   color: #ff9000;
-  font-family: 'NotoSansJP-Medium';
+  font-family: 'RobotoSlab-Medium';
 `;
 
 export const ProfileButton = styled.TouchableOpacity``;
@@ -49,7 +48,7 @@ export const ProvidersList = styled(
 })``;
 
 export const ProvidersListTitle = styled.Text`
-  font-family: 'NotoSansJP-Medium';
+  font-family: 'RobotoSlab-Medium';
   color: #f4ede8;
   font-size: 24px;
   margin-bottom: 24px;
@@ -60,7 +59,6 @@ export const ProviderContainer = styled(RectButton)`
   align-items: center;
   padding: 20px;
   margin-bottom: 16px;
-
   background: #3e3b47;
   border-radius: 10px;
 `;
@@ -77,7 +75,7 @@ export const ProviderInfo = styled.View`
 `;
 
 export const ProviderName = styled.Text`
-  font-family: 'NotoSansJP-Medium';
+  font-family: 'RobotoSlab-Medium';
   font-size: 18px;
   color: #f4ede8;
 `;

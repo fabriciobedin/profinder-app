@@ -28,7 +28,7 @@ export interface Provider {
 }
 
 const Dashboard: React.FC = () => {
-  const { signOut, user } = useAuth();
+  const { user } = useAuth();
   const navigation = useNavigation();
   const [providers, setProviders] = useState<Provider[]>([]);
 
@@ -54,13 +54,7 @@ const Dashboard: React.FC = () => {
         </HeaderTitle>
 
         <ProfileButton onPress={() => navigation.navigate('Profile')}>
-          <UserAvatar
-            source={{
-              uri:
-                user.avatar_url ||
-                'https://avatars1.githubusercontent.com/u/18118086?s=460&u=c92e79f9ed6b4e502cfa8e1e3ff8de70aa8e14fb&v=4'
-            }}
-          />
+          <UserAvatar source={{ uri: user.avatar_url }} />
         </ProfileButton>
       </Header>
 
