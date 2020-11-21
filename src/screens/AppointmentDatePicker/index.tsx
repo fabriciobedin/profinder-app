@@ -143,7 +143,7 @@ const AppointmentDatePicker: React.FC = () => {
         <BackButton onPress={() => navigation.goBack()}>
           <Icon name="chevron-left" size={24} color="#999591" />
         </BackButton>
-        <HeaderTitle>Cabelereiros</HeaderTitle>
+        <HeaderTitle>Prestadores</HeaderTitle>
 
         <UserAvatar source={{ uri: user.avatar_url }} />
       </Header>
@@ -171,9 +171,9 @@ const AppointmentDatePicker: React.FC = () => {
           <DateTimePicker
             mode="date"
             is24Hour
-            display="calendar"
+            display="default"
             value={selectedDate}
-            onChange={(_, date) => date && setSelectedDate(date)}
+            onChange={(_: any, date: any) => date && setSelectedDate(date)}
             textColor="#f4ede8"
             minimumDate={minimumDate}
           />

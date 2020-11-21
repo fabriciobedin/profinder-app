@@ -8,10 +8,11 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 24px;
+  font-size: 20px;
   color: #f4ede8;
   font-family: 'NotoSansJP-Medium';
   margin: 24px 0;
+  align-self: center;
 `;
 
 export const Avatar = styled.Image`

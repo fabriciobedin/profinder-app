@@ -8,13 +8,13 @@ interface ContainerProps {
 
 export const Container = styled.View<ContainerProps>`
   width: 100%;
-  height: 60px;
+  height: 50px;
   padding: 0 16px;
-  background: #232129;
+  background: #28262e;
   border-radius: 10px;
   margin-bottom: 8px;
   border-width: 2px;
-  border-color: #232129;
+  border-color: #28262e;
 
   flex-direction: row;
   align-items: center;
@@ -22,7 +22,7 @@ export const Container = styled.View<ContainerProps>`
   ${props =>
     props.isErrored &&
     css`
-      border-color: #c53030;
+      border-color: #d00;
     `}
 
   ${props =>
@@ -34,7 +34,7 @@ export const Container = styled.View<ContainerProps>`
 
 export const TextInput = styled.TextInput`
   flex: 1;
-  color: #fff;
+  color: #807a75;
   font-size: 18px;
   font-family: 'NotoSansJP-Regular';
 `;

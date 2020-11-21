@@ -9,7 +9,7 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'NotoSansJP-Medium';
   font-size: 32px;
   color: #f4ede8;
   margin-top: 48px;
@@ -34,6 +34,6 @@ export const OkButton = styled(RectButton)`
 
 export const OkButtonText = styled.Text`
   color: #312e38;
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'NotoSansJP-Medium';
   font-size: 18px;
 `;

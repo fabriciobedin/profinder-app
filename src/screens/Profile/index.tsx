@@ -13,7 +13,6 @@ import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
 import { useAuth } from '../../hooks/auth';
-import api from '../../services/api';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -29,64 +28,69 @@ interface ProfileFormData {
 }
 
 const Profile: React.FC = () => {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const formRef = useRef<FormHandles>(null);
-  const navigation = useNavigation();
+  const { goBack } = useNavigation();
 
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const newPasswordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
 
-  const handleSaveProfile = useCallback(async (data: ProfileFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSaveProfile = useCallback(
+    async (data: ProfileFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome obrigatório'),
-        email: Yup.string()
-          .required('E-mail obrigatório')
-          .email('Digite um e-mail válido'),
-        old_password: Yup.string(),
-        password: Yup.string().when('old_password', {
-          is: val => !!val.length,
-          then: Yup.string().required('Campo obrigatório'),
-          otherwise: Yup.string()
-        }),
-        password_confirmation: Yup.string()
-          .when('old_password', {
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome obrigatório'),
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail válido'),
+          old_password: Yup.string(),
+          password: Yup.string().when('old_password', {
             is: val => !!val.length,
             then: Yup.string().required('Campo obrigatório'),
             otherwise: Yup.string()
-          })
-          .oneOf([Yup.ref('password'), 'undefined'], 'Confirmação incorreta')
-      });
+          }),
+          password_confirmation: Yup.string()
+            .when('old_password', {
+              is: val => !!val.length,
+              then: Yup.string().required('Campo obrigatório'),
+              otherwise: Yup.string()
+            })
+            .oneOf([Yup.ref('password'), undefined], 'Confirmação incorreta')
+        });
 
-      await schema.validate(data, {
-        abortEarly: false
-      });
+        await schema.validate(data, {
+          abortEarly: false
+        });
 
-      console.log(data);
+        console.log(data);
 
-      Alert.alert(
-        'Perfil atualizado com sucesso!',
-        'As informações do perfil foram atualizadas.'
-      );
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
+        Alert.alert(
+          'Perfil atualizado com sucesso!',
+          'As informações do perfil foram atualizadas.'
+        );
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
 
-        formRef.current?.setErrors(errors);
+          formRef.current?.setErrors(errors);
 
-        return;
+          return;
+        }
+
+        Alert.alert(
+          'Erro no cadastro',
+          'Ocorreu um erro ao fazer cadastro, tente novamente.'
+        );
+      } finally {
+        goBack();
       }
-
-      Alert.alert(
-        'Erro no cadastro',
-        'Ocorreu um erro ao fazer cadastro, tente novamente.'
-      );
-    }
-  }, []);
+    },
+    [goBack]
+  );
 
   return (
     <>
@@ -98,13 +102,7 @@ const Profile: React.FC = () => {
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={{ flex: 1 }}>
           <Container>
-            <Avatar
-              source={{
-                uri:
-                  user.avatar_url ||
-                  'https://avatars1.githubusercontent.com/u/18118086?s=460&u=c92e79f9ed6b4e502cfa8e1e3ff8de70aa8e14fb&v=4'
-              }}
-            />
+            <Avatar source={{ uri: user.avatar_url }} />
 
             <View>
               <Title>Atualizar perfil</Title>
@@ -171,8 +169,15 @@ const Profile: React.FC = () => {
               />
 
               <Button onPress={() => formRef.current?.submitForm()}>
-                Confirmar mudanças
+                Salvar mudanças
               </Button>
+
+              <Button onPress={signOut}>Sair</Button>
+
+              {/* <BackToSignIn onPress={signOut}>
+                <Icon name="log-out" size={20} color="#777" />
+                <BackToSignInText>Sair</BackToSignInText>
+              </BackToSignIn> */}
             </Form>
           </Container>
         </ScrollView>

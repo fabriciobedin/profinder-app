@@ -24,6 +24,8 @@
   "rules": {
     "@typescript-eslint/no-use-before-define": "off",
     "camelcase": "off",
+    "react/jsx-closing-bracket-location": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "no-use-before-define": "off",
     "prettier/prettier": "error",
     "react/jsx-one-expression-per-line": "off",

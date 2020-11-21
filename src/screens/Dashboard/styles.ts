@@ -26,7 +26,7 @@ export const HeaderTitle = styled.Text`
 
 export const UserName = styled.Text`
   color: #ff9000;
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'NotoSansJP-Medium';
 `;
 
 export const ProfileButton = styled.TouchableOpacity``;
@@ -48,7 +48,7 @@ export const ProvidersList = styled(
 })``;
 
 export const ProvidersListTitle = styled.Text`
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'NotoSansJP-Medium';
   color: #f4ede8;
   font-size: 24px;
   margin-bottom: 24px;
@@ -75,7 +75,7 @@ export const ProviderInfo = styled.View`
 `;
 
 export const ProviderName = styled.Text`
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'NotoSansJP-Medium';
   font-size: 18px;
   color: #f4ede8;
 `;

@@ -43,7 +43,7 @@ export const BackButton = styled.TouchableOpacity``;
 export const HeaderTitle = styled.Text`
   color: #f4ede8;
   font-size: 20px;
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'NotoSansJP-Medium';
   line-height: 28px;
   margin-left: 16px;
 `;
@@ -86,7 +86,7 @@ export const ProviderAvatar = styled.Image`
 `;
 
 export const ProviderName = styled.Text<ProviderNameProps>`
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'NotoSansJP-Medium';
   font-size: 16px;
   margin-left: 8px;
   color: ${props => (props.selected ? '#232129' : '#f4ede8')};
@@ -95,7 +95,7 @@ export const ProviderName = styled.Text<ProviderNameProps>`
 export const Calendar = styled.View``;
 
 export const Title = styled.Text`
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'NotoSansJP-Medium';
   color: #f4ede8;
   font-size: 24px;
   margin: 0 24px 24px;
@@ -152,5 +152,5 @@ export const CreateAppointmentButton = styled(RectButton)`
 export const CreateAppointmentButtonText = styled.Text`
   color: #312e38;
   font-size: 18px;
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'NotoSansJP-Medium';
 `;
